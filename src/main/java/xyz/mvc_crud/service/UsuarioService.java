@@ -9,14 +9,15 @@ import xyz.mvc_crud.model.dto.UsuarioResponseDTO;
 import xyz.mvc_crud.model.entity.Usuario;
 import xyz.mvc_crud.repository.UsuarioRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
 
-    private UsuarioMapper mapper;
-    private UsuarioRepository repository;
+    private final UsuarioMapper mapper;
+    private final UsuarioRepository repository;
 
     @Transactional
     public UsuarioResponseDTO cadastrarUsuario(UsuarioRequestDTO dto){
@@ -25,6 +26,10 @@ public class UsuarioService {
         }
 
         Usuario usuario = mapper.toEntity(dto);
+
+        LocalDateTime dataCriacao = LocalDateTime.now();
+        usuario.setDataCadastro(dataCriacao);
+        usuario.setAtivo(true);
         Usuario usuarioSalvo = repository.save(usuario);
 
         return mapper.toResponseDTO(usuarioSalvo);
