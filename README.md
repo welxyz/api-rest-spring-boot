@@ -21,7 +21,7 @@ Este repositório foi desenvolvido para consolidar os fundamentos da construçã
 
 **1. Clone o repositório:**
 ```bash
-git clone https://github.com/welxyz/crud-mvc-java.git
+git clone https://github.com/welxyz/api-rest-spring-boot.git
 ```
 
 **2. Configure o banco de dados:**
