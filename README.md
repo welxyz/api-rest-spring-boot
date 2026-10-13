@@ -1,14 +1,12 @@
-# API RESTful - Usuários
+## API RESTful - Usuários
 
-Uma API RESTful fundacional construída com Spring Boot para demonstrar a aplicação de boas práticas de mercado, Clean Code e arquitetura em camadas (Vertical Slicing).
-Este repositório foi desenvolvido para consolidar os fundamentos da construção de APIs corporativas, evitando overengineering e focando em um design limpo e escalável.
+Uma API REST  construída com Spring Boot demonstrando fundamentos com arquitetura em camadas.
+Este repositório é uma demonstração mínima (Controller → Service → Repository, com DTOs e Mapper).
 
 **Tecnologias Utilizadas:**
 
-* Java 21
-* Spring Boot 3.x
-* PostgreSQL
-* Lombok (Exclusivamente para injeção de dependências via construtor e redução de boilerplate)
+Java 21 · Spring Boot 4.1.1 · PostgreSQL · Gradle ·
+Lombok (utilizado para reduzir boilerplate)
 
 **Decisões Arquiteturais Destacadas:**
 
@@ -19,28 +17,37 @@ Este repositório foi desenvolvido para consolidar os fundamentos da construçã
 
 ## Como Executar
 
-**1. Clone o repositório:**
+**Pré-requisitos:** JDK 21 e PostgreSQL rodando em `localhost:5432`.
+
+**1. Clone o repositório**
 ```bash
-git clone https://github.com/welxyz/api-rest-spring-boot.git
+git clone https://github.com/xyz/api-rest-spring-postgres.git
+cd api-rest-spring-postgres
 ```
 
-**2. Configure o banco de dados:**
-Abra `application.properties` e insira as credenciais do seu PostgreSQL local:
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/seu_banco
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
-spring.jpa.hibernate.ddl-auto=update
+**2. Crie o banco de dados**
+```bash
+psql -U postgres -c "CREATE DATABASE api_rest_spring_db;"
 ```
+
+A aplicação usa `postgres`/`postgres` por padrão. Se o seu PostgreSQL usa outras credenciais, ajuste `src/main/resources/application.properties`.
+
+**3. Execute**
+```bash
+./gradlew bootRun        # Linux/macOS
+gradlew.bat bootRun      # Windows
+```
+
+A API sobe em `http://localhost:8090`.
 
 ## Endpoints
 
-A API expõe o recurso `/usuarios` com os seguintes métodos:
+A api expõe o recurso `/usuarios` com os seguintes métodos:
 
-| Verbo | Endpoint | Descrição | Status HTTP | 
-| :--- | :--- | :--- | :--- | 
-| **POST** | `/usuarios` | Cadastra um novo usuário | `201 Created` | 
-| **GET** | `/usuarios` | Lista todos os usuários cadastrados | `200 OK` | 
+| Verbo | Endpoint | Descrição                           | Status HTTP | 
+| :--- | :--- |:------------------------------------| :--- | 
+| **POST** | `/usuarios` | Cadastra um novo usuário            | `201 Created` | 
+| **GET** | `/usuarios` | Lista todos os usuários ativos      | `200 OK` | 
 | **GET** | `/usuarios/{id}` | Busca um usuário específico pelo ID | `200 OK` | 
-| **PUT** | `/usuarios/{id}` | Atualiza os dados de um usuário | `200 OK` | 
+| **PUT** | `/usuarios/{id}` | Atualiza os dados de um usuário     | `200 OK` | 
 | **DELETE** | `/usuarios/{id}` | Realiza o soft delete de um usuário | `204 No Content` | 
