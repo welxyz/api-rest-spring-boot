@@ -1,13 +1,13 @@
-package xyz.mvc_crud.controller;
+package xyz.apirest.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import xyz.mvc_crud.model.dto.UsuarioRequestDTO;
-import xyz.mvc_crud.model.dto.UsuarioResponseDTO;
-import xyz.mvc_crud.service.UsuarioService;
+import xyz.apirest.model.dto.UsuarioRequestDTO;
+import xyz.apirest.model.dto.UsuarioResponseDTO;
+import xyz.apirest.service.UsuarioService;
 
 import java.util.List;
 
