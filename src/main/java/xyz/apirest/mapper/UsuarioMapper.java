@@ -1,9 +1,9 @@
-package xyz.mvc_crud.mapper;
+package xyz.apirest.mapper;
 
 import org.springframework.stereotype.Component;
-import xyz.mvc_crud.model.dto.UsuarioRequestDTO;
-import xyz.mvc_crud.model.dto.UsuarioResponseDTO;
-import xyz.mvc_crud.model.entity.Usuario;
+import xyz.apirest.model.dto.UsuarioRequestDTO;
+import xyz.apirest.model.dto.UsuarioResponseDTO;
+import xyz.apirest.model.entity.Usuario;
 
 @Component
 public class UsuarioMapper {

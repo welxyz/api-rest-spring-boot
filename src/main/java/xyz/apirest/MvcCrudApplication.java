@@ -1,4 +1,4 @@
-package xyz.mvc_crud;
+package xyz.apirest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
