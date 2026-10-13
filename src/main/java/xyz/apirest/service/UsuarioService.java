@@ -1,13 +1,13 @@
-package xyz.mvc_crud.service;
+package xyz.apirest.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.mvc_crud.mapper.UsuarioMapper;
-import xyz.mvc_crud.model.dto.UsuarioRequestDTO;
-import xyz.mvc_crud.model.dto.UsuarioResponseDTO;
-import xyz.mvc_crud.model.entity.Usuario;
-import xyz.mvc_crud.repository.UsuarioRepository;
+import xyz.apirest.mapper.UsuarioMapper;
+import xyz.apirest.model.dto.UsuarioRequestDTO;
+import xyz.apirest.model.dto.UsuarioResponseDTO;
+import xyz.apirest.model.entity.Usuario;
+import xyz.apirest.repository.UsuarioRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,18 +30,20 @@ public class UsuarioService {
         LocalDateTime dataCriacao = LocalDateTime.now();
         usuario.setDataCadastro(dataCriacao);
         usuario.setAtivo(true);
+
+        // save() opcional: o dirty checking grava a alteração no commit da transação
         Usuario usuarioSalvo = repository.save(usuario);
 
         return mapper.toResponseDTO(usuarioSalvo);
     }
 
     public UsuarioResponseDTO buscarPorId(Long id){
-        Usuario usuario = repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        Usuario usuario = repository.findByIdAndAtivoTrue(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
         return mapper.toResponseDTO(usuario);
     }
 
     public List<UsuarioResponseDTO> buscarTodos(){
-        List<Usuario> usuarios = repository.findAll();
+        List<Usuario> usuarios = repository.findAllByAtivoTrue();
 
         List<UsuarioResponseDTO> usuariosDTO = usuarios.stream()
                 .map(usuario -> mapper.toResponseDTO(usuario))
@@ -52,7 +54,7 @@ public class UsuarioService {
 
     @Transactional
     public void deletarUsuario(Long id){
-        Usuario usuario = repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        Usuario usuario = repository.findByIdAndAtivoTrue(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
         usuario.setAtivo(false);
         repository.save(usuario);
@@ -60,7 +62,7 @@ public class UsuarioService {
 
     @Transactional
     public UsuarioResponseDTO atualizarUsuario(Long id, UsuarioRequestDTO dto){
-        Usuario usuarioNoBanco = repository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        Usuario usuarioNoBanco = repository.findByIdAndAtivoTrue(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
 
         if(!usuarioNoBanco.getEmail().equals(dto.email())){
             if(repository.existsByEmail(dto.email())){

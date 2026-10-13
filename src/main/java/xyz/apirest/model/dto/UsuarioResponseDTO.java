@@ -1,4 +1,4 @@
-package xyz.mvc_crud.model.dto;
+package xyz.apirest.model.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

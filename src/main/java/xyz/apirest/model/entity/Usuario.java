@@ -1,4 +1,4 @@
-package xyz.mvc_crud.model.entity;
+package xyz.apirest.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
